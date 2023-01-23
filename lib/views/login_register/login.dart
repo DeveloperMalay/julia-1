@@ -12,6 +12,7 @@ import 'package:julia/views/home.dart';
 import 'package:julia/views/login_register/verify.dart';
 import 'package:provider/provider.dart';
 import '../../const/const.dart';
+import '../../helper/navigator_function.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -157,27 +158,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         authProvider.sentEmail(_emailController.text);
 
                         Timer(const Duration(seconds: 2), () {
-                          Navigator.of(context).pushReplacement(
-                            PageRouteBuilder(
-                              transitionDuration:
-                                  const Duration(milliseconds: 500),
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      VerifyScreen(
+                          screenReplaceNavigator(
+                              context,
+                              VerifyScreen(
                                 email: _emailController.text,
-                              ),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: Tween<Offset>(
-                                          begin: const Offset(1, 0),
-                                          end: Offset.zero)
-                                      .animate(animation),
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                              ));
                         });
                       }
                     },
@@ -216,33 +201,16 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 30,
               ),
-              Center(
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        PageRouteBuilder(
-                          transitionDuration: const Duration(milliseconds: 500),
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  const Home(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            return SlideTransition(
-                              position: Tween<Offset>(
-                                      begin: const Offset(1, 0),
-                                      end: Offset.zero)
-                                  .animate(animation),
-                              child: child,
-                            );
-                          },
-                        ),
-                      );
-                    },
+              InkWell(
+                  onTap: () {
+                    screenReplaceNavigator(context, Home());
+                  },
+                  child: Center(
                     child: Text(
                       'skip'.tr(),
-                      style: const TextStyle(color: Colors.black, fontSize: 20),
-                    )),
-              ),
+                      style: const TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  )),
               SizedBox(
                 height: 180.h,
               ),

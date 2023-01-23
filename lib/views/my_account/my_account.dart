@@ -19,6 +19,7 @@ import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/repository/create_ticket_repo.dart';
+import '../../helper/navigator_function.dart';
 import '../../provider/auth_provider.dart';
 import '../login_register/login.dart';
 import 'components/new_user_edit_screen.dart';
@@ -112,29 +113,19 @@ class _MyAccountState extends State<MyAccount> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Image.asset(
+                              'assets/juliaLogo.png',
+                              height: 110,
+                            ),
                             CupertinoButton(
                                 color: greenColor,
                                 child: Text("set_your_profile".tr()),
                                 onPressed: () {
-                                  Navigator.of(context).push(PageRouteBuilder(
-                                    transitionDuration:
-                                        const Duration(milliseconds: 500),
-                                    pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        const NewUserEditScreen(
-                                      isHome: false,
-                                    ),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return SlideTransition(
-                                        position: Tween<Offset>(
-                                                begin: const Offset(1, 0),
-                                                end: Offset.zero)
-                                            .animate(animation),
-                                        child: child,
-                                      );
-                                    },
-                                  ));
+                                  screenNavigator(
+                                      context,
+                                      NewUserEditScreen(
+                                        isHome: false,
+                                      ));
                                 }),
                             TextButton(
                               onPressed: () {
@@ -263,23 +254,7 @@ class _MyAccountState extends State<MyAccount> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.of(context).push(PageRouteBuilder(
-                                transitionDuration:
-                                    const Duration(milliseconds: 500),
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        const EditProfileScreen(),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return SlideTransition(
-                                    position: Tween<Offset>(
-                                            begin: const Offset(1, 0),
-                                            end: Offset.zero)
-                                        .animate(animation),
-                                    child: child,
-                                  );
-                                },
-                              ));
+                              screenNavigator(context, EditProfileScreen());
                             },
                             child: Padding(
                               padding:
@@ -305,95 +280,15 @@ class _MyAccountState extends State<MyAccount> {
                               ),
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              // Navigator.of(context).push(PageRouteBuilder(
-                              //   transitionDuration:
-                              //       const Duration(milliseconds: 500),
-                              //   pageBuilder: (context, animation,
-                              //           secondaryAnimation) =>
-                              //       const AccountProfileDetailsScreenState(),
-                              //   transitionsBuilder: (context, animation,
-                              //       secondaryAnimation, child) {
-                              //     return SlideTransition(
-                              //       position: Tween<Offset>(
-                              //               begin: const Offset(1, 0),
-                              //               end: Offset.zero)
-                              //           .animate(animation),
-                              //       child: child,
-                              //     );
-                              //   },
-                              // ));
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 30.0, top: 20),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.edit_note_outlined,
-                                    size: 30,
-                                    color: redColor,
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "profile".tr(),
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 30.0, top: 20),
                             child: InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  PageRouteBuilder(
-                                    transitionDuration:
-                                        const Duration(milliseconds: 500),
-                                    pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        const MyAdsScreen(),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return SlideTransition(
-                                        position: Tween<Offset>(
-                                                begin: const Offset(1, 0),
-                                                end: Offset.zero)
-                                            .animate(animation),
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                screenNavigator(context, MyAdsScreen());
                               },
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(
-                                    PageRouteBuilder(
-                                      transitionDuration:
-                                          const Duration(milliseconds: 500),
-                                      pageBuilder: (context, animation,
-                                              secondaryAnimation) =>
-                                          const MyAdsScreen(),
-                                      transitionsBuilder: (context, animation,
-                                          secondaryAnimation, child) {
-                                        return SlideTransition(
-                                          position: Tween<Offset>(
-                                                  begin: const Offset(1, 0),
-                                                  end: Offset.zero)
-                                              .animate(animation),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
+                                  screenNavigator(context, MyAdsScreen());
                                 },
                                 child: Row(
                                   children: [
@@ -418,25 +313,7 @@ class _MyAccountState extends State<MyAccount> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  transitionDuration:
-                                      const Duration(milliseconds: 500),
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      const InVoicesScreen(),
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    return SlideTransition(
-                                      position: Tween<Offset>(
-                                              begin: const Offset(1, 0),
-                                              end: Offset.zero)
-                                          .animate(animation),
-                                      child: child,
-                                    );
-                                  },
-                                ),
-                              );
+                              screenNavigator(context, InVoicesScreen());
                             },
                             child: Padding(
                               padding:
@@ -463,25 +340,7 @@ class _MyAccountState extends State<MyAccount> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  transitionDuration:
-                                      const Duration(milliseconds: 500),
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      BuyBusiness(),
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    return SlideTransition(
-                                      position: Tween<Offset>(
-                                              begin: const Offset(1, 0),
-                                              end: Offset.zero)
-                                          .animate(animation),
-                                      child: child,
-                                    );
-                                  },
-                                ),
-                              );
+                              screenNavigator(context, BuyBusiness());
                             },
                             child: Padding(
                               padding:
@@ -635,25 +494,7 @@ class _MyAccountState extends State<MyAccount> {
                             padding: const EdgeInsets.only(left: 30.0, top: 20),
                             child: InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  PageRouteBuilder(
-                                    transitionDuration:
-                                        const Duration(milliseconds: 500),
-                                    pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        const SettingScreen(),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return SlideTransition(
-                                        position: Tween<Offset>(
-                                                begin: const Offset(1, 0),
-                                                end: Offset.zero)
-                                            .animate(animation),
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                screenNavigator(context, SettingScreen());
                               },
                               child: Row(
                                 children: [
@@ -704,28 +545,11 @@ class _MyAccountState extends State<MyAccount> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        Navigator.of(context)
-                                            .push(PageRouteBuilder(
-                                          transitionDuration:
-                                              const Duration(milliseconds: 500),
-                                          pageBuilder: (context, animation,
-                                                  secondaryAnimation) =>
-                                              const HelpandSupport(
-                                                  url:
-                                                      'https://www.julia.sr/help.php'),
-                                          transitionsBuilder: (context,
-                                              animation,
-                                              secondaryAnimation,
-                                              child) {
-                                            return SlideTransition(
-                                              position: Tween<Offset>(
-                                                      begin: const Offset(1, 0),
-                                                      end: Offset.zero)
-                                                  .animate(animation),
-                                              child: child,
-                                            );
-                                          },
-                                        ));
+                                        screenNavigator(
+                                            context,
+                                            HelpandSupport(
+                                                url:
+                                                    'https://www.julia.sr/help.php'));
                                       },
                                       child: Text(
                                         'help_support'.tr(),
@@ -897,24 +721,7 @@ class _MyAccountState extends State<MyAccount> {
                           color: greenColor,
                           child: Text('next'.tr()),
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacement(PageRouteBuilder(
-                              transitionDuration:
-                                  const Duration(milliseconds: 500),
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      const LoginScreen(),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: Tween<Offset>(
-                                          begin: const Offset(1, 0),
-                                          end: Offset.zero)
-                                      .animate(animation),
-                                  child: child,
-                                );
-                              },
-                            ));
+                            screenNavigator(context, LoginScreen());
                           }),
                     ),
                   ],

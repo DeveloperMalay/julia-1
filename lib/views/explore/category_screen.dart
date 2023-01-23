@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:julia/const/const.dart';
 import 'package:julia/data/model/all_category_model.dart';
 import 'package:julia/data/repository/all_category_repo.dart';
+import 'package:julia/helper/navigator_function.dart';
 import 'package:julia/views/explore/subcategory_screen.dart';
 
 class CategoryscreenforSearch extends StatefulWidget {
@@ -133,15 +135,15 @@ class _CategoryscreenforSearchState extends State<CategoryscreenforSearch> {
     },
     {
       'Id': '30',
-      'imageUrl': 'assets/category/Woningen en percelen.png',
-    },
-    {
-      'Id': '31',
       'imageUrl': 'assets/category/Zakelijke goederen.png',
     },
     {
-      'Id': '32',
+      'Id': '31',
       'imageUrl': 'assets/category/Zwaarmateriaal.png',
+    },
+    {
+      'Id': '32',
+      'imageUrl': 'assets/category/Dagvers.png',
     },
   ];
 
@@ -213,102 +215,83 @@ class _CategoryscreenforSearchState extends State<CategoryscreenforSearch> {
                 color: Colors.white,
               ),
             )),
-        body: FutureBuilder<List<AllCategory>>(
-          future: apidata,
-          builder: (context, snapshot) {
-            List<AllCategory>? data = snapshot.data;
-            if (snapshot.hasData) {
-              return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 140,
-                    childAspectRatio: .1 / .11,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: data!.length,
-                  itemBuilder: (context, index) {
-                    var currentItem = data[index];
-                    var cItem = categoryData[index];
+        body: Padding(
+          padding: const EdgeInsets.only(top: 18.0, left: 10, right: 10),
+          child: FutureBuilder<List<AllCategory>>(
+            future: apidata,
+            builder: (context, snapshot) {
+              List<AllCategory>? data = snapshot.data;
+              if (snapshot.hasData) {
+                return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 160.w,
+                      childAspectRatio: 1,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemCount: data!.length,
+                    itemBuilder: (context, index) {
+                      var currentItem = data[index];
+                      var cItem = categoryData[index];
 
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        color: Colors.white,
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(4, 8),
-                            spreadRadius: -3,
-                            blurRadius: 5,
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
                             color: Colors.grey,
-                          )
-                        ],
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            PageRouteBuilder(
-                              transitionDuration:
-                                  const Duration(milliseconds: 500),
-                              // reverseTransitionDuration: const Duration(seconds: 1),
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      SubCategoryScreenforSearch(
-                                          categoryId: currentItem.id!),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: Tween<Offset>(
-                                          begin: const Offset(1, 0),
-                                          end: Offset.zero)
-                                      .animate(animation),
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            cItem['imageUrl'] == null
-                                ? Image.asset('')
-                                : Image.asset(
-                                    '${cItem['imageUrl']}',
-                                    height: 35,
-                                  ),
-                            Text(
-                              context.locale.toString() == 'nl'
-                                  ? currentItem.postCategoryName!
-                                  : categories[index],
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              style: TextStyle(
-                                color: greenColor,
-                                fontSize: 12,
-                              ),
-                            ),
+                          ),
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(4, 8),
+                              spreadRadius: -3,
+                              blurRadius: 5,
+                              color: Colors.grey,
+                            )
                           ],
                         ),
-                      ),
-                    );
-
-                    // return Text(currentItem.postCategoryName!);
-                  });
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            } else {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: greenColor,
-                ),
-              );
-            }
-          },
+                        child: InkWell(
+                          onTap: () {
+                            screenNavigator(
+                                context,
+                                SubCategoryScreenforSearch(
+                                    categoryId: currentItem.id!));
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              cItem['imageUrl'] == null
+                                  ? Image.asset('')
+                                  : Image.asset(
+                                      '${cItem['imageUrl']}',
+                                      height: 30.h,
+                                    ),
+                              Text(
+                                context.locale.toString() == 'nl'
+                                    ? currentItem.postCategoryName!
+                                    : categories[index],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: greenColor,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: greenColor,
+                  ),
+                );
+              }
+            },
+          ),
         ),
       ),
     );

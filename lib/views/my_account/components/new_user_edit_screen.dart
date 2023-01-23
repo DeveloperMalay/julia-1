@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -166,7 +167,7 @@ class _NewUserEditScreenState extends State<NewUserEditScreen> {
                 child: TextFormField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                      hintText: 'Full Name',
+                      hintText: 'fullname'.tr(),
                       border: const OutlineInputBorder()),
                 ),
               ),
@@ -174,8 +175,10 @@ class _NewUserEditScreenState extends State<NewUserEditScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextFormField(
                   controller: _descController,
-                  decoration: const InputDecoration(
-                      hintText: 'Description', border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                      // hintStyle: TextStyle(fontSize: 12),
+                      hintText: 'tell_julia_about_the_things_you_like'.tr(),
+                      border: OutlineInputBorder()),
                 ),
               ),
               Padding(
@@ -183,7 +186,8 @@ class _NewUserEditScreenState extends State<NewUserEditScreen> {
                 child: TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                      hintText: "Email", border: const OutlineInputBorder()),
+                      hintText: "email_address".tr(),
+                      border: const OutlineInputBorder()),
                   validator: (input) =>
                       input!.isValidEmail() ? null : "Check your email",
                 ),
@@ -193,7 +197,7 @@ class _NewUserEditScreenState extends State<NewUserEditScreen> {
                 child: TextFormField(
                   controller: _numberController,
                   decoration: InputDecoration(
-                      hintText: 'Contact Number',
+                      hintText: "PhoneNumber".tr(),
                       border: const OutlineInputBorder()),
                 ),
               ),
@@ -201,24 +205,24 @@ class _NewUserEditScreenState extends State<NewUserEditScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextFormField(
                   controller: _stateController,
-                  decoration: const InputDecoration(
-                      hintText: 'State', border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                      hintText: "address".tr(), border: OutlineInputBorder()),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextFormField(
                   controller: _districtController,
-                  decoration: const InputDecoration(
-                      hintText: 'District', border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                      hintText: 'District'.tr(), border: OutlineInputBorder()),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextFormField(
                   controller: _areaController,
-                  decoration: const InputDecoration(
-                      hintText: 'Area', border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                      hintText: "resort".tr(), border: OutlineInputBorder()),
                 ),
               ),
               Padding(

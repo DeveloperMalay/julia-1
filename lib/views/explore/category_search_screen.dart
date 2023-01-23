@@ -48,9 +48,7 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
           backgroundColor: greenColor,
           title: Text(
             "category_wise_product_search".tr(),
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
           actions: [
             Padding(

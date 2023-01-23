@@ -4,6 +4,7 @@ import 'package:julia/const/const.dart';
 import 'package:julia/data/model/all_category_model.dart';
 import 'package:julia/data/model/category_count_model.dart';
 import 'package:julia/data/repository/all_category_repo.dart';
+import 'package:julia/helper/navigator_function.dart';
 import 'package:julia/views/explore/category_search_screen.dart';
 
 class Explore extends StatefulWidget {
@@ -135,15 +136,15 @@ class _ExploreState extends State<Explore> {
     },
     {
       'Id': '30',
-      'imageUrl': 'assets/category/Woningen en percelen.png',
-    },
-    {
-      'Id': '31',
       'imageUrl': 'assets/category/Zakelijke goederen.png',
     },
     {
-      'Id': '32',
+      'Id': '31',
       'imageUrl': 'assets/category/Zwaarmateriaal.png',
+    },
+    {
+      'Id': '32',
+      'imageUrl': 'assets/category/Dagvers.png',
     },
   ];
 
@@ -248,26 +249,10 @@ class _ExploreState extends State<Explore> {
                             ]),
                         child: InkWell(
                           onTap: () {
-                            Navigator.of(context).push(
-                              PageRouteBuilder(
-                                transitionDuration:
-                                    const Duration(milliseconds: 500),
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        CategorySearchScreen(
-                                            categoryId: titleData.id!),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return SlideTransition(
-                                    position: Tween<Offset>(
-                                            begin: const Offset(1, 0),
-                                            end: Offset.zero)
-                                        .animate(animation),
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
+                            screenNavigator(
+                                context,
+                                CategorySearchScreen(
+                                    categoryId: titleData.id!));
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -314,5 +299,3 @@ class _ExploreState extends State<Explore> {
 
 
 
-// CategorySearchScreen(
-//                                           categoryId: titleData.id!),

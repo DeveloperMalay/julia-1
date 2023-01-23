@@ -18,6 +18,7 @@ import '../../data/model/product_model.dart';
 import 'package:julia/data/model/profile_details_model.dart';
 import 'package:julia/data/repository/get_user_details_repo.dart';
 
+import '../../helper/navigator_function.dart';
 import '../../provider/auth_provider.dart';
 import '../../provider/google_sign_in_provider.dart';
 import '../my_account/components/new_user_edit_screen.dart';
@@ -158,6 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Image.asset(
+                            'assets/juliaLogo.png',
+                            height: 110,
+                          ),
                           CupertinoButton(
                               color: greenColor,
                               child: Text("set_your_profile".tr()),
@@ -276,25 +281,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.of(context).push(
-                                    PageRouteBuilder(
-                                      transitionDuration:
-                                          const Duration(milliseconds: 500),
-                                      pageBuilder: (context, animation,
-                                              secondaryAnimation) =>
-                                          const CategoryscreenforSearch(),
-                                      transitionsBuilder: (context, animation,
-                                          secondaryAnimation, child) {
-                                        return SlideTransition(
-                                          position: Tween<Offset>(
-                                                  begin: const Offset(1, 0),
-                                                  end: Offset.zero)
-                                              .animate(animation),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
+                                  screenNavigator(
+                                      context, CategoryscreenforSearch());
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.only(

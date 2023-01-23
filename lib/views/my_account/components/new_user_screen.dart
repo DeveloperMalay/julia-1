@@ -148,7 +148,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                             borderRadius: BorderRadius.circular(50),
                             child: Image.network(
                               user.photoURL ??
-                                  'https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png',
+                                  'https://www.julia.sr/assets/images/profilepic.webp',
                               fit: BoxFit.cover,
                             ),
                           ),
