@@ -155,37 +155,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   if (snapshot.data == null) {
                     print("data---->${snapshot.data}");
-                    return Center(
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: yellowColor,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          SizedBox(
+                            height: 180,
+                          ),
                           Image.asset(
                             'assets/juliaLogo.png',
-                            height: 110,
+                            height: 180,
+                          ),
+                          SizedBox(
+                            height: 100,
                           ),
                           CupertinoButton(
                               color: greenColor,
                               child: Text("set_your_profile".tr()),
                               onPressed: () {
-                                Navigator.of(context).push(PageRouteBuilder(
-                                  transitionDuration:
-                                      const Duration(milliseconds: 500),
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      const NewUserEditScreen(
-                                    isHome: false,
-                                  ),
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    return SlideTransition(
-                                      position: Tween<Offset>(
-                                              begin: const Offset(1, 0),
-                                              end: Offset.zero)
-                                          .animate(animation),
-                                      child: child,
-                                    );
-                                  },
-                                ));
+                                screenNavigator(
+                                    context,
+                                    NewUserEditScreen(
+                                      isHome: false,
+                                    ));
                               }),
                           TextButton(
                             onPressed: () {

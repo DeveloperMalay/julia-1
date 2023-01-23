@@ -334,46 +334,55 @@ class _CategoriesState extends State<Categories> {
                 ),
               ),
               body: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/juliaLogo.png',
-                      height: 110,
-                    ),
-                    Center(
-                      child: Text(
-                        'register_first'.tr(),
-                        style: const TextStyle(fontSize: 20),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: yellowColor,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 180,
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CupertinoButton(
-                          color: greenColor,
-                          child: Text('next'.tr()),
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacement(PageRouteBuilder(
-                              transitionDuration:
-                                  const Duration(milliseconds: 500),
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      const LoginScreen(),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: Tween<Offset>(
-                                          begin: const Offset(1, 0),
-                                          end: Offset.zero)
-                                      .animate(animation),
-                                  child: child,
-                                );
-                              },
-                            ));
-                          }),
-                    ),
-                  ],
+                      Image.asset(
+                        'assets/juliaLogo.png',
+                        height: 180,
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Center(
+                        child: Text(
+                          'register_first'.tr(),
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Center(
+                        child: CupertinoButton(
+                            color: greenColor,
+                            child: Text('next'.tr()),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushReplacement(PageRouteBuilder(
+                                transitionDuration:
+                                    const Duration(milliseconds: 500),
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        const LoginScreen(),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  return SlideTransition(
+                                    position: Tween<Offset>(
+                                            begin: const Offset(1, 0),
+                                            end: Offset.zero)
+                                        .animate(animation),
+                                    child: child,
+                                  );
+                                },
+                              ));
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

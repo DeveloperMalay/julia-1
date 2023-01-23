@@ -109,23 +109,28 @@ class _MyAccountState extends State<MyAccount> {
                     }
                     if (snapshot.data == null) {
                       print("data---->${snapshot.data}");
-                      return Center(
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: yellowColor,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            SizedBox(
+                              height: 180,
+                            ),
                             Image.asset(
                               'assets/juliaLogo.png',
-                              height: 110,
+                              height: 180,
+                            ),
+                            SizedBox(
+                              height: 100,
                             ),
                             CupertinoButton(
                                 color: greenColor,
                                 child: Text("set_your_profile".tr()),
                                 onPressed: () {
-                                  screenNavigator(
-                                      context,
-                                      NewUserEditScreen(
-                                        isHome: false,
-                                      ));
+                                  screenNavigator(context,
+                                      NewUserEditScreen(isHome: false));
                                 }),
                             TextButton(
                               onPressed: () {
@@ -702,29 +707,38 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
               body: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/juliaLogo.png',
-                      height: 110,
-                    ),
-                    Center(
-                      child: Text(
-                        'register_first'.tr(),
-                        style: const TextStyle(fontSize: 20),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: yellowColor,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 180,
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CupertinoButton(
-                          color: greenColor,
-                          child: Text('next'.tr()),
-                          onPressed: () {
-                            screenNavigator(context, LoginScreen());
-                          }),
-                    ),
-                  ],
+                      Image.asset(
+                        'assets/juliaLogo.png',
+                        height: 180,
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Center(
+                        child: Text(
+                          'register_first'.tr(),
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Center(
+                        child: CupertinoButton(
+                            color: greenColor,
+                            child: Text('next'.tr()),
+                            onPressed: () {
+                              screenNavigator(context, LoginScreen());
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
